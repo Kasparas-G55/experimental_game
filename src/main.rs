@@ -58,9 +58,8 @@ fn ui(mut commands: Commands, asset_server: Res<AssetServer>) {
             "hello world!",
             TextStyle {
                 font: asset_server.load("fonts/FiraSans-Bold.ttf"),
-                font_size: 100.0,
+                font_size: 16.0,
                 color: Color::RED,
-                ..default()
             },
             TextAlignment {
                 vertical: VerticalAlign::Center,
@@ -70,4 +69,31 @@ fn ui(mut commands: Commands, asset_server: Res<AssetServer>) {
         visibility: Visibility { is_visible: true },
         ..default()
     });
+
+    commands
+        .spawn_bundle(ButtonBundle {
+            style: Style {
+                size: Size::new(Val::Px(150.0), Val::Px(65.0)),
+                margin: Rect::all(Val::Auto),
+                justify_content: JustifyContent::Center,
+                align_items: AlignItems::Center,
+                ..default()
+            },
+            color: UiColor::from(Color::BLUE),
+            ..default()
+        })
+        .with_children(|parent| {
+            parent.spawn_bundle(TextBundle {
+                text: Text::with_section(
+                    "Push Me!",
+                    TextStyle {
+                        font: asset_server.load("fonts/FiraSans-Bold.ttf"),
+                        font_size: 16.0,
+                        color: Color::GRAY,
+                    },
+                    Default::default(),
+                ),
+                ..default()
+            });
+        });
 }
