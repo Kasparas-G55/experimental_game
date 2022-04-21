@@ -7,15 +7,15 @@
     {
       "type": "lldb",
       "request": "launch",
-      "name": "Debug executable 'first_game'",
+      "name": "Debug executable 'experimental_game'",
       "cargo": {
         "args": [
           "build",
-          "--bin=first_game",
-          "--package=first_game"
+          "--bin=experimental_game",
+          "--package=experimental_game"
         ],
         "filter": {
-          "name": "first_game",
+          "name": "experimental_game",
           "kind": "bin"
         }
       },
@@ -25,16 +25,16 @@
     {
       "type": "lldb",
       "request": "launch",
-      "name": "Debug unit tests in executable 'first_game'",
+      "name": "Debug unit tests in executable 'experimental_game'",
       "cargo": {
         "args": [
           "test",
           "--no-run",
-          "--bin=first_game",
-          "--package=first_game"
+          "--bin=experimental_game",
+          "--package=experimental_game"
         ],
         "filter": {
-          "name": "first_game",
+          "name": "experimental_game",
           "kind": "bin"
         }
       },
