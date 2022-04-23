@@ -1,15 +1,17 @@
+#![allow(dead_code, unused_variables)]
 use bevy::prelude::*;
+
+mod ui;
 
 fn main() {
     App::new()
         .insert_resource(Msaa { samples: 4 })
         .add_plugins(DefaultPlugins)
         // .add_startup_system(setup)
-        .add_startup_system(ui)
+        .add_startup_system(ui::setup)
         .run();
 }
 
-#[warn(dead_code)]
 fn setup(
     mut commands: Commands,
     mut meshes: ResMut<Assets<Mesh>>,
@@ -45,55 +47,4 @@ fn setup(
         transform: Transform::from_xyz(-2.0, 2.5, 5.0).looking_at(Vec3::ZERO, Vec3::Y),
         ..default()
     });
-}
-
-fn ui(mut commands: Commands, asset_server: Res<AssetServer>) {
-    commands.spawn_bundle(UiCameraBundle::default());
-
-    commands.spawn_bundle(TextBundle {
-        node: Node {
-            size: Vec2::new(10.0, 10.0),
-        },
-        text: Text::with_section(
-            "hello world!",
-            TextStyle {
-                font: asset_server.load("fonts/FiraSans-Bold.ttf"),
-                font_size: 16.0,
-                color: Color::RED,
-            },
-            TextAlignment {
-                vertical: VerticalAlign::Center,
-                horizontal: HorizontalAlign::Center,
-            },
-        ),
-        visibility: Visibility { is_visible: true },
-        ..default()
-    });
-
-    commands
-        .spawn_bundle(ButtonBundle {
-            style: Style {
-                size: Size::new(Val::Px(150.0), Val::Px(65.0)),
-                margin: Rect::all(Val::Auto),
-                justify_content: JustifyContent::Center,
-                align_items: AlignItems::Center,
-                ..default()
-            },
-            color: UiColor::from(Color::BLUE),
-            ..default()
-        })
-        .with_children(|parent| {
-            parent.spawn_bundle(TextBundle {
-                text: Text::with_section(
-                    "Push Me!",
-                    TextStyle {
-                        font: asset_server.load("fonts/FiraSans-Bold.ttf"),
-                        font_size: 16.0,
-                        color: Color::GRAY,
-                    },
-                    Default::default(),
-                ),
-                ..default()
-            });
-        });
 }
